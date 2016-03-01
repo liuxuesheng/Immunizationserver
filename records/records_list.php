@@ -5,7 +5,7 @@ include '../database.php';
 function returnRecordsList(){
 $list = array();
 
- $sql0 = "SELECT id,immu_name,immu_times,immu_importance FROM immu_knowledge";
+ $sql0 = "SELECT id,immu_name,immu_subtitle,immu_times,immu_importance FROM immu_knowledge";
 getRecordsHasImage($sql0,$list,'immu_knowledge');
 
 
@@ -23,7 +23,7 @@ function getRecordsHasImage($mysql, &$list, $section){
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            $nametring = array('item_section' => $section, 'id' => $row["id"], 'immu_name' => $row["immu_name"], 'immu_times' => $row["immu_times"], 'immu_importance' => $row["immu_importance"]);
+            $nametring = array('item_section' => $section, 'id' => $row["id"],'immu_subtitle' => $row["immu_subtitle"], 'immu_name' => $row["immu_name"], 'immu_times' => $row["immu_times"], 'immu_importance' => $row["immu_importance"]);
             array_push($list, $nametring);
         }
     }
