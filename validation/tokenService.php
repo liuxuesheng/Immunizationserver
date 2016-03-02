@@ -1,7 +1,7 @@
 <?php
 include_once '../database.php';
 
-function createAndSaveTokenForUser($username) {
+function createAndSaveTokenForUser($email) {
     $token = bin2hex(openssl_random_pseudo_bytes(64));
     while(true){
         $result = db_query("SELECT 1 FROM userprofile WHERE token = '$token' LIMIT 1");
@@ -11,7 +11,7 @@ function createAndSaveTokenForUser($username) {
         $token = bin2hex(openssl_random_pseudo_bytes(64));
     }
 
-    db_query_noreturn("UPDATE userprofile SET token='$token' WHERE username='$username'");
+    db_query_noreturn("UPDATE userprofile SET token='$token' WHERE email='$email'");
 
     return $token;
 }
