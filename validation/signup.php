@@ -10,6 +10,7 @@ $validEmail = validateEmail($email);
 if ($validEmail){
     $hash = getHashFromPassword($password);
     db_query_noreturn("INSERT INTO userprofile (email, hash) VALUES ('$email', '$hash');");
+    db_query_noreturn("INSERT INTO baby_infomation (email) VALUES ('$email');");
     createAndSaveTokenForUser($email);
     echo "Success!";
 } else {
