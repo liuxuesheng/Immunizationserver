@@ -53,6 +53,19 @@ function returnPage1($page, $sec){
 
     $nametring = substr($nametring, 0, -1);
 
+    //record times
+    $sql4 = "SELECT immu_times FROM ".$sec." WHERE id = $page";
+    $result = mysqli_query($conn, $sql4);
+    $immu_times = "";
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            $immu_times .= $row["immu_times"] . ",";
+        }
+    }
+
+    $immu_times = substr($immu_times, 0, -1);
 
 
 $item1 = array(
@@ -67,8 +80,12 @@ $item3 = array(
     'type' => 'subtitle_records',
     'name' => $immu_subtitle);
 
+$item4 = array(
+    'type' => 'immu_times',
+    'name' => $immu_times);
 
-$list = array($item1,$item2,$item3);
+
+$list = array($item1,$item2,$item3,$item4);
 	echo json_encode($list);
 }
 echo(returnPage1($recordPage, $section))
