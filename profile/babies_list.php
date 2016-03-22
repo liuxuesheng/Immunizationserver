@@ -2,9 +2,6 @@
 header("Content-Type:text/html;charset=utf-8");
 include '../database.php';
 
-
-
-
 function returnBabyList(){
 $list = array();
 

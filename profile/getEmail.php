@@ -5,35 +5,31 @@ include '../database.php';
 
 function returnEmail(){
 
-    //title
-    $sql = " SELECT baby_infomation.email FROM `baby_infomation`,`userprofile` WHERE userprofile.email = 'hanmingyue.hanna@gmail.com' AND userprofile.email = baby_infomation.email";
+    $list = array();
 
+    $token = isset($_GET['token']) ? $_GET['token'] : '';
 
+    $sql0 = "SELECT email FROM baby_infomation where token ='".$token."'";
+    getEmail($sql0,$list,'baby_infomation');
+
+    echo json_encode($list);
+}
+
+//getEmail 负责从数据库读取email 
+function getEmail($mysql, &$list, $section){
     $conn = db_connect();
     mysqli_query($conn, "SET CHARACTER SET 'utf8';");
-    $result = mysqli_query($conn, $sql);
-    $email = "";
+    $result = mysqli_query($conn, $mysql);  
 
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            $email .= $row["email"] . ",";
+            $nametring = array('item_section' => $section,'email' => $row["email"]);
+            array_push($list, $nametring);
         }
     }
-
-    $email = substr($email, 0, -1);
-
-
-
-$item = array(
-    'type' => 'email',
-    'name' => $email);
-
-
-$list = array($item);
-	echo json_encode($list);
-
 }
 
-echo(returnEmail())
+echo(returnEmail());
+
 ?>
