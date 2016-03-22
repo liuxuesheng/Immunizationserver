@@ -8,9 +8,6 @@ $list = array();
  $sql0 = "SELECT id,immu_name,immu_subtitle,immu_times,immu_importance FROM immu_knowledge";
 getRecordsHasImage($sql0,$list,'immu_knowledge');
 
-
-
-
 echo json_encode($list);
 }
 
