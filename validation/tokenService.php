@@ -12,7 +12,7 @@ function createAndSaveTokenForUser($email) {
     }
 
     db_query_noreturn("UPDATE userprofile SET token='$token' WHERE email='$email'");
-
+    db_query_noreturn("UPDATE baby_infomation SET token='$token' WHERE email='$email'");
     return $token;
 }
 ?>
